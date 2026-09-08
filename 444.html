@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ทัศนคติต่อวัฒนธรรมการหารค่าใช้จ่าย</title>
+    <title>Research & Real-time Analytics</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -58,8 +58,8 @@
                         <i class="fa-solid fa-chart-simple text-2xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold text-slate-900 dark:text-white leading-tight lang-text" data-th="Research & Real-time Analytics" data-en="Research & Real-time Analytics">Research & Real-time Analytics</h1>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 font-medium lang-text" data-th="ทัศนคติต่อวัฒนธรรมการหารค่าใช้จ่าย" data-en="Attitudes towards Bill Splitting Culture">ทัศนคติต่อวัฒนธรรมการหารค่าใช้จ่าย</p>
+                        <!-- หัวข้อคลีนๆ ไม่มีซับไตเติลตามรีเควส -->
+                        <h1 class="text-xl font-bold text-slate-900 dark:text-white leading-tight">Research & Real-time Analytics</h1>
                     </div>
                 </div>
                 <div class="hidden lg:flex items-center gap-4">
@@ -69,7 +69,6 @@
                         <button onclick="switchTab('manage', this)" class="nav-btn px-5 py-2 font-medium rounded text-sm transition-colors lang-text" data-th="จัดการข้อมูล API" data-en="Manage Data">จัดการข้อมูล API</button>
                         <button onclick="switchTab('table', this)" class="nav-btn px-5 py-2 font-medium rounded text-sm transition-colors lang-text" data-th="ตารางคำตอบ" data-en="Data Table">ตารางคำตอบ</button>
                     </div>
-                    <!-- ปุ่มสลับภาษา และ สลับธีม สีสันสะอาดตา -->
                     <div class="flex items-center gap-2">
                         <button onclick="toggleLang()" id="langBtn" class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-600 flex items-center justify-center text-blue-600 dark:text-blue-400 bg-white dark:bg-slate-800 font-bold text-xs hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">TH</button>
                         <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-600 flex items-center justify-center bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
@@ -86,7 +85,6 @@
         <!-- TAB 1: แดชบอร์ด -->
         <div id="tab-dashboard" class="tab-content active">
             
-            <!-- Minimal Connection Status & Refresh Button -->
             <div class="bg-white dark:bg-slate-800 rounded-xl card-shadow border border-slate-200 dark:border-slate-700 px-5 py-3 mb-6 flex flex-wrap justify-between items-center gap-4">
                 <div class="flex items-center gap-3">
                     <span class="relative flex h-3 w-3">
@@ -94,7 +92,7 @@
                         <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                     </span>
                     <span class="text-sm font-bold text-slate-800 dark:text-slate-200 lang-text" data-th="ข้อมูลล่าสุด (Live Data)" data-en="Live Data">ข้อมูลล่าสุด (Live Data)</span>
-                    <span id="statusText" class="text-xs text-slate-500 dark:text-slate-400 font-medium ml-2">- กำลังตรวจสอบ...</span>
+                    <span id="statusText" class="text-xs text-slate-500 dark:text-slate-400 font-medium ml-2">- กำลังโหลด...</span>
                 </div>
                 <div class="flex items-center gap-4">
                     <span class="text-sm font-medium text-slate-600 dark:text-slate-300"><span class="lang-text" data-th="ผู้ตอบทั้งหมด:" data-en="Total Responses:">ผู้ตอบทั้งหมด:</span> <span id="kpiTotalTop" class="font-bold text-blue-600 dark:text-blue-400 text-base">0</span></span>
@@ -106,7 +104,7 @@
 
             <div id="dashboardDataContainer" style="display: none;">
                 
-                <!-- Dashboard Filters -->
+                <!-- Filters -->
                 <div class="bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 p-4 mb-6 flex flex-wrap items-center gap-3">
                     <div class="text-sm font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2 mr-2">
                         <i class="fa-solid fa-filter text-blue-500"></i> <span class="lang-text" data-th="ตัวกรองแดชบอร์ด:" data-en="Filters:">ตัวกรองแดชบอร์ด:</span>
@@ -168,6 +166,14 @@
                     </div>
                 </div>
 
+                <!-- สรุปคะแนนส่วนที่ 2 (คะแนนทัศนคติเฉลี่ยเต็ม 5) -->
+                <h3 class="text-lg font-bold text-slate-700 dark:text-slate-200 mb-4 border-b border-slate-200 dark:border-slate-700 pb-2 mt-10">
+                    <i class="fa-solid fa-star-half-stroke text-amber-500 mr-2"></i> ระดับความเห็นด้วยในแต่ละด้าน (เฉลี่ยจาก 5 คะแนน)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-10" id="part2AveragesContainer">
+                    <!-- HTML Cards จะถูกสร้างอัตโนมัติจาก JavaScript -->
+                </div>
+
                 <!-- Demographics -->
                 <h3 class="text-lg font-bold text-slate-700 dark:text-slate-200 mb-4 border-b border-slate-200 dark:border-slate-700 pb-2 lang-text" data-th="ข้อมูลทั่วไปของผู้ตอบ" data-en="Demographics">ข้อมูลทั่วไปของผู้ตอบ</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -189,28 +195,28 @@
                     </div>
                 </div>
 
-                <!-- Scenarios (5 กราฟแนวนอน) -->
+                <!-- ส่วนที่ 3 HTML Progress Bars -->
                 <h3 class="text-lg font-bold text-slate-700 dark:text-slate-200 mb-4 border-b border-slate-200 dark:border-slate-700 pb-2 mt-10 lang-text" data-th="สถานการณ์เฉพาะและพฤติกรรม" data-en="Scenarios & Behaviors">สถานการณ์เฉพาะและพฤติกรรม</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-xl card-shadow border border-slate-100 dark:border-slate-700">
-                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1 lang-text" data-th="1. รูปแบบการจ่ายเงินในเดทแรก" data-en="1. First Date Payment">1. รูปแบบการจ่ายเงินในเดทแรก</h4>
-                        <div style="height: 220px;" class="mt-4"><canvas id="firstDateChart"></canvas></div>
+                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">1. รูปแบบการจ่ายเงินในเดทแรก</h4>
+                        <div id="htmlFirstDateChart" class="w-full"></div>
                     </div>
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-xl card-shadow border border-slate-100 dark:border-slate-700">
-                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1 lang-text" data-th="2. มื้อใหญ่หรือมีแอลกอฮอล์ (ที่ไม่ได้กิน)" data-en="2. Expensive Meals/Alcohol">2. มื้อใหญ่หรือมีแอลกอฮอล์ (ที่ไม่ได้กิน)</h4>
-                        <div style="height: 220px;" class="mt-4"><canvas id="expensiveMealChart"></canvas></div>
+                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">2. มื้อใหญ่หรือมีแอลกอฮอล์ (ที่ไม่ได้กิน)</h4>
+                        <div id="htmlExpensiveMealChart" class="w-full"></div>
                     </div>
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-xl card-shadow border border-slate-100 dark:border-slate-700">
-                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1 lang-text" data-th="3. พฤติกรรมเมื่อถึงเวลาโอนเงินคืน" data-en="3. Repayment Behavior">3. พฤติกรรมเมื่อถึงเวลาโอนเงินคืน</h4>
-                        <div style="height: 220px;" class="mt-4"><canvas id="repayChart"></canvas></div>
+                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">3. พฤติกรรมเมื่อถึงเวลาโอนเงินคืน</h4>
+                        <div id="htmlRepayChart" class="w-full"></div>
                     </div>
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-xl card-shadow border border-slate-100 dark:border-slate-700">
-                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1 lang-text" data-th="4. เมื่อถูกชวนไปร้านที่มีราคาสูงเกินงบ" data-en="4. Overbudget Invitations">4. เมื่อถูกชวนไปร้านที่มีราคาสูงเกินงบ</h4>
-                        <div style="height: 220px;" class="mt-4"><canvas id="overbudgetChart"></canvas></div>
+                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">4. เมื่อถูกชวนไปร้านที่มีราคาสูงเกินงบ</h4>
+                        <div id="htmlOverbudgetChart" class="w-full"></div>
                     </div>
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-xl card-shadow border border-slate-100 dark:border-slate-700 md:col-span-2">
-                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-1 lang-text" data-th="5. ผลของการหารที่ไม่เหมาะสมต่อการแฮงค์เอาต์ครั้งต่อไป" data-en="5. Impact on Next Hangout">5. ผลของการหารที่ไม่เหมาะสมต่อการแฮงค์เอาต์ครั้งต่อไป</h4>
-                        <div style="height: 220px;" class="mt-4"><canvas id="hangoutChart"></canvas></div>
+                        <h4 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-2">5. ผลของการหารที่ไม่เหมาะสมต่อการแฮงค์เอาต์ครั้งต่อไป</h4>
+                        <div id="htmlHangoutChart" class="w-full lg:w-1/2"></div>
                     </div>
                 </div>
 
@@ -227,7 +233,7 @@
             </div>
         </div>
 
-        <!-- TAB 2: ทำแบบสอบถาม (ไม่แตะต้อง คงไว้แบบเป๊ะๆ 100%) -->
+        <!-- TAB 2: ทำแบบสอบถาม -->
         <div id="tab-survey" class="tab-content">
             <div class="max-w-4xl mx-auto bg-white dark:bg-slate-800 rounded-xl card-shadow border border-slate-200 dark:border-slate-700 p-6 sm:p-10 text-left">
                 
@@ -444,7 +450,6 @@
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
                     <div class="text-center pt-4">
                         <button id="submitBtn" type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-10 rounded-lg shadow-sm transition-colors text-lg w-full sm:w-auto">
                             ส่งแบบสอบถาม
@@ -479,19 +484,16 @@
                             <th class="px-4 py-3 font-semibold">เพศ</th>
                             <th class="px-4 py-3 font-semibold">สถานภาพ</th>
                             <th class="px-4 py-3 font-semibold">รายได้</th>
-                            <!-- เปลี่ยนหัวตารางส่วนที่ 2 (คงคำว่า ด้าน) -->
                             <th class="px-4 py-3 font-semibold text-blue-600 dark:text-blue-400">ด้านความยุติธรรม</th>
                             <th class="px-4 py-3 font-semibold text-blue-600 dark:text-blue-400">ด้านการป้องกันการเอาเปรียบ</th>
                             <th class="px-4 py-3 font-semibold text-blue-600 dark:text-blue-400">ด้านความสัมพันธ์กับรายได้</th>
                             <th class="px-4 py-3 font-semibold text-blue-600 dark:text-blue-400">ด้านความละเอียดอ่อน</th>
                             <th class="px-4 py-3 font-semibold text-blue-600 dark:text-blue-400">ด้านความเกรงใจ</th>
-                            <!-- เปลี่ยนหัวตารางส่วนที่ 3 (กระชับเข้าใจง่าย) -->
                             <th class="px-4 py-3 font-semibold text-rose-500 dark:text-rose-400">รูปแบบเดทแรก</th>
                             <th class="px-4 py-3 font-semibold text-rose-500 dark:text-rose-400">มื้อใหญ่/แอลกอฮอล์</th>
                             <th class="px-4 py-3 font-semibold text-rose-500 dark:text-rose-400">การโอนเงินคืน</th>
                             <th class="px-4 py-3 font-semibold text-rose-500 dark:text-rose-400">ร้านเกินงบ</th>
                             <th class="px-4 py-3 font-semibold text-rose-500 dark:text-rose-400">ผลต่อการแฮงก์เอาต์</th>
-                            
                             <th class="px-4 py-3 font-semibold text-orange-500">เคยอึดอัด</th>
                             <th class="px-4 py-3 font-semibold">ข้อคิดเห็นเพิ่มเติม</th>
                         </tr>
@@ -508,6 +510,7 @@
     <script>
         let charts = {};
         let isThai = true;
+        // ลิงก์ API ค่าเริ่มต้น
         let APP_URL = 'https://script.google.com/macros/s/AKfycbx5xZpa-fA_iF5It6gYdYuBrzfBzjU5vS-6rf0qc1TF97-e8dZ2u2VZhY-JmeJECA3p/exec';
 
         window.onload = () => {
@@ -524,7 +527,6 @@
             if(btn) btn.classList.add('active');
         }
 
-        // ฟังก์ชันเปลี่ยนภาษา
         function toggleLang() {
             isThai = !isThai;
             document.getElementById('langBtn').innerText = isThai ? 'TH' : 'EN';
@@ -533,7 +535,6 @@
             });
         }
 
-        // ฟังก์ชันเปลี่ยนธีม
         function toggleDarkMode() {
             const html = document.documentElement;
             html.classList.toggle('dark');
@@ -580,6 +581,7 @@
         async function fetchData() {
             const statusBox = document.getElementById('statusText');
             statusBox.innerText = '- กำลังโหลด...';
+            statusBox.className = "text-xs font-medium ml-2 text-amber-500";
             
             try {
                 const res = await fetch(APP_URL, { redirect: 'follow' });
@@ -588,16 +590,16 @@
                 
                 let dataRows;
                 try { dataRows = JSON.parse(rawData); } 
-                catch(e) { throw new Error("ข้อมูลไม่ใช่ JSON (กรุณาเช็กการตั้งค่าสคริปต์)"); }
+                catch(e) { throw new Error("ข้อมูลไม่ใช่ JSON"); }
 
-                if(!Array.isArray(dataRows)) throw new Error("ข้อมูลไม่ใช่รูปแบบตาราง");
+                if(!Array.isArray(dataRows)) throw new Error("ข้อมูลไม่ใช่ตาราง");
 
                 if(dataRows.length > 0 && dataRows[0] && (dataRows[0][0] === "ประทับเวลา" || String(dataRows[0][0]).includes("Timestamp"))) {
                     dataRows.shift(); 
                 }
 
                 window.globalData = dataRows;
-                resetFilters(); // กรองข้อมูลและแสดงผลครั้งแรก
+                resetFilters();
 
                 document.getElementById('dashboardDataContainer').style.display = 'block';
                 statusBox.innerText = '- เชื่อมต่อสำเร็จ';
@@ -610,7 +612,6 @@
             }
         }
 
-        // ระบบตัวกรอง (Dashboard Filters)
         function applyFilters() {
             if(!window.globalData) return;
             
@@ -640,7 +641,7 @@
 
         function processDashboardData(rows) {
             const ages = [], genders = [], statuses = [], incomes = [];
-            let totalFairness = 0, validFairnessCount = 0;
+            let sums = [0,0,0,0,0], counts = [0,0,0,0,0];
             const firstDates = [], expMeals = [], repays = [], overBudgets = [], hangouts = [];
             let awkwardCount = 0;
             const validComments = [];
@@ -653,8 +654,10 @@
                 if(r[3]) statuses.push(r[3]);
                 if(r[4]) incomes.push(r[4]);
                 
-                const fScore = parseInt(r[5]);
-                if(!isNaN(fScore)) { totalFairness += fScore; validFairnessCount++; }
+                for(let i = 0; i < 5; i++) {
+                    const val = parseInt(r[5+i]);
+                    if(!isNaN(val)) { sums[i] += val; counts[i]++; }
+                }
 
                 if(r[10]) firstDates.push(r[10]);
                 if(r[11]) expMeals.push(r[11]);
@@ -671,28 +674,48 @@
             });
 
             const total = rows.length;
-            // อัปเดตตัวเลขหน้าแดชบอร์ดตามที่กรองมา
             document.getElementById('kpiTotal').innerText = total;
-            document.getElementById('kpiFairness').innerHTML = validFairnessCount > 0 ? `${(totalFairness / validFairnessCount).toFixed(1)} <span class="text-xl text-slate-400 font-normal">/ 5</span>` : "0.0";
+            document.getElementById('kpiTotalTop').innerText = window.globalData ? window.globalData.length : 0;
+            
+            document.getElementById('kpiFairness').innerHTML = counts[0] > 0 ? `${(sums[0] / counts[0]).toFixed(1)} <span class="text-xl text-slate-400 font-normal">/ 5</span>` : "0.0";
             document.getElementById('kpiAwkward').innerText = total > 0 ? `${Math.round((awkwardCount / total) * 100)}%` : "0%";
             document.getElementById('kpiFirstDate').innerText = truncateLabel(getTopMode(firstDates), 35);
-            
-            // อัปเดตตัวเลขรวมทั้งหมดด้านบนขวา (ยึดตามข้อมูลทั้งหมด ไม่ใช่ตัวกรอง)
-            document.getElementById('kpiTotalTop').innerText = window.globalData ? window.globalData.length : 0;
+
+            // การ์ดส่วนที่ 2
+            const p2Titles = ["ด้านความยุติธรรม", "การป้องกันเอาเปรียบ", "ความสัมพันธ์กับรายได้", "ความละเอียดอ่อน", "ด้านความเกรงใจ"];
+            const p2Colors = ['bg-blue-500', 'bg-emerald-500', 'bg-purple-500', 'bg-rose-500', 'bg-amber-500'];
+            let p2Html = '';
+            for(let i = 0; i < 5; i++) {
+                let avg = counts[i] > 0 ? (sums[i] / counts[i]).toFixed(1) : "0.0";
+                let pct = (avg / 5) * 100;
+                p2Html += `
+                    <div class="bg-white dark:bg-slate-800 p-4 rounded-xl card-shadow border border-slate-100 dark:border-slate-700 flex flex-col justify-center">
+                        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">${p2Titles[i]}</span>
+                        <div class="flex items-end gap-2 mb-2">
+                            <span class="text-2xl font-black text-slate-800 dark:text-white leading-none">${avg}</span>
+                            <span class="text-xs text-slate-400 font-medium mb-0.5">/ 5</span>
+                        </div>
+                        <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-1.5 mt-auto">
+                            <div class="${p2Colors[i]} h-1.5 rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>`;
+            }
+            document.getElementById('part2AveragesContainer').innerHTML = p2Html;
 
             const isDark = document.documentElement.classList.contains('dark');
             const gridColor = isDark ? '#334155' : '#f1f5f9';
-
+            
             renderBarChart('ageChart', ages, '#3b82f6', gridColor);
             renderPieChart('genderChart', genders, ['#ec4899', '#3b82f6', '#94a3b8']);
-            renderBarChart('statusChart', statuses, '#a855f7', gridColor);
+            renderPieChart('statusChart', statuses, ['#a855f7', '#d946ef', '#ec4899', '#8b5cf6']); 
             renderBarChart('incomeChart', incomes, '#10b981', gridColor);
             
-            renderHBarChart('firstDateChart', firstDates, '#f43f5e', gridColor);
-            renderHBarChart('expensiveMealChart', expMeals, '#0ea5e9', gridColor);
-            renderHBarChart('repayChart', repays, '#10b981', gridColor);
-            renderHBarChart('overbudgetChart', overBudgets, '#6366f1', gridColor);
-            renderHBarChart('hangoutChart', hangouts, '#f59e0b', gridColor); 
+            // วาดแถบ Progress HTML
+            renderHtmlBarChart('htmlFirstDateChart', firstDates, 'bg-rose-500');
+            renderHtmlBarChart('htmlExpensiveMealChart', expMeals, 'bg-sky-500');
+            renderHtmlBarChart('htmlRepayChart', repays, 'bg-emerald-500');
+            renderHtmlBarChart('htmlOverbudgetChart', overBudgets, 'bg-indigo-500');
+            renderHtmlBarChart('htmlHangoutChart', hangouts, 'bg-amber-500');
 
             const feed = document.getElementById('commentsFeed');
             feed.innerHTML = '';
@@ -708,7 +731,36 @@
                 });
             }
 
-            renderTable(rows); // อัปเดตตารางตามตัวกรองด้วย
+            renderTable(rows);
+        }
+
+        function renderHtmlBarChart(containerId, dataArray, colorClass) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            if(dataArray.length === 0) { container.innerHTML = '<p class="text-xs text-slate-400">ไม่มีข้อมูล</p>'; return; }
+            
+            const counts = {};
+            dataArray.forEach(i => counts[i] = (counts[i] || 0) + 1);
+            const sortedKeys = Object.keys(counts).sort((a,b) => counts[b] - counts[a]); 
+            
+            let html = '<div class="space-y-3 mt-4">';
+            sortedKeys.forEach(key => {
+                const count = counts[key];
+                const pct = Math.round((count / dataArray.length) * 100);
+                html += `
+                    <div class="flex flex-col">
+                        <div class="flex justify-between items-start text-xs sm:text-sm mb-1.5 gap-4">
+                            <span class="text-slate-700 dark:text-slate-300 leading-snug">${key}</span>
+                            <span class="font-bold text-slate-900 dark:text-white whitespace-nowrap">${count} (${pct}%)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2">
+                            <div class="${colorClass} h-2 rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
         }
 
         function renderTable(rows) {
@@ -750,14 +802,15 @@
             return top;
         }
         function truncateLabel(t, m) { return t.length > m ? t.substring(0, m) + '...' : t; }
+        
+        Chart.defaults.font.family = "'Kanit', sans-serif";
+
         function wrapLabel(t, m) {
             if (!t) return ["-"];
             const w = t.split(' '); const l = []; let c = "";
             w.forEach(word => { if ((c + word).length > m) { l.push(c.trim()); c = word + " "; } else c += word + " "; });
             l.push(c.trim()); return l;
         }
-
-        Chart.defaults.font.family = "'Kanit', sans-serif";
 
         function renderBarChart(id, arr, color, gridColor) {
             const ctx = document.getElementById(id); if(charts[id]) charts[id].destroy();
@@ -766,16 +819,6 @@
                 type: 'bar',
                 data: { labels: Object.keys(c).map(l => wrapLabel(l, 12)), datasets: [{ data: Object.values(c), backgroundColor: color, borderRadius: 4 }] },
                 options: { plugins: { legend: { display: false } }, maintainAspectRatio: false, scales: { x: { grid: {display: false} }, y: { grid: {color: gridColor}, ticks: {precision:0} } } }
-            });
-        }
-
-        function renderHBarChart(id, arr, color, gridColor) {
-            const ctx = document.getElementById(id); if(charts[id]) charts[id].destroy();
-            const c = {}; arr.forEach(i => c[i] = (c[i]||0)+1);
-            charts[id] = new Chart(ctx, {
-                type: 'bar',
-                data: { labels: Object.keys(c).map(l => wrapLabel(l, 35)), datasets: [{ data: Object.values(c), backgroundColor: color, borderRadius: 4 }] },
-                options: { indexAxis: 'y', plugins: { legend: { display: false } }, maintainAspectRatio: false, scales: { y: { grid: {display: false} }, x: { grid: {color: gridColor}, ticks: {precision:0} } } }
             });
         }
 
